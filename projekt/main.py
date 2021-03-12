@@ -121,6 +121,10 @@ DX_btn_right_desc.grid(row=16,column=3, padx=(0,0), pady=(3, 0))
 DX_btn_right = Radiobutton(root, variable=var_right, value=3)
 DX_btn_right.grid(row=16, column=4, padx=(0,0), pady=(3, 0), sticky="w")
 
+######################################  Large Buttons
+
+
+
 
 
 root.mainloop()
