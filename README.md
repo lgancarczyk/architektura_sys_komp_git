@@ -1,0 +1,1 @@
+# architektura_sys_komp_git
