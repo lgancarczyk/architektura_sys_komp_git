@@ -23,16 +23,18 @@ heksadecymalne= {'0000':'0',
                  '1100':'C',
                  '1101':'D',
                  '1110':'E',
-                 '1111':'F'}                 
+                 '1111':'F',
+                 }                 
 
-input_list= ['AH_entry',
-             'BH_entry', 
-             'CH_entry', 
-             'DH_entry',
-             'AL_entry',
-             'BL_entry',
-             'CL_entry',
-             'DL_entry']
+input_list= {'AH_entry':"",
+             'BH_entry':"", 
+             'CH_entry':"", 
+             'DH_entry':"",
+             'AL_entry':"",
+             'BL_entry':"",
+             'CL_entry':"",
+             'DL_entry':"",
+            }
 
 var_left= IntVar()
 var_right= IntVar()
@@ -48,10 +50,14 @@ small_font = ('Verdana',10)
     
 def start():
     print("Start")
-    # print(str(input_list[0]))
+    print(input_list)
+
+
+
+
 def create_random():
     for i in input_list:
-         print("create random")
+         print("Random")
          pair1_hex = random.choice(list(heksadecymalne.items()))
          print(pair1_hex[1])
          pair2_hex = random.choice(list(heksadecymalne.items()))
@@ -59,10 +65,17 @@ def create_random():
 
          pair_input = pair1_hex[1]+pair2_hex[1]
          print(pair_input)
-         i.delete(0, END)
-         i.insert(0, pair_input)         
 
-         
+         input_list[i]==pair_input
+
+         input_list[i].delete(0, END)
+         input_list[i].insert(0, pair_input) 
+         print(input_list[i])
+
+        
+
+
+
 ##################################  Output
 
 AX_output_desc = Label(root, text="AX", font=small_font)
@@ -89,45 +102,45 @@ DX_output.grid(row=7, column=2, padx=(0,0), pady=(20, 0))
 
 AH_entry_desc = Label(root, text="AH")
 AH_entry_desc.grid(row=1,column=4, padx=(20,0), pady=(20, 0))
-input_list[0] = Entry(root, font=large_font, width=3, justify='center')
-input_list[0].grid(row=1, column=5, padx=(0,0), pady=(20, 0))
+input_list['AH_entry'] = Entry(root, font=large_font, width=3, justify='center')
+input_list['AH_entry'].grid(row=1, column=5, padx=(0,0), pady=(20, 0))
 
 BH_entry_desc = Label(root, text="BH")
 BH_entry_desc.grid(row=3,column=4, padx=(20,0), pady=(20, 0))
-input_list[1] = Entry(root, font=large_font, width=3, justify='center')
-input_list[1].grid(row=3, column=5, padx=(0,0), pady=(20, 0))
+input_list['BH_entry'] = Entry(root, font=large_font, width=3, justify='center')
+input_list['BH_entry'].grid(row=3, column=5, padx=(0,0), pady=(20, 0))
 
 CH_entry_desc = Label(root, text="CH")
 CH_entry_desc.grid(row=5,column=4, padx=(20,0), pady=(20, 0))
-input_list[2] = Entry(root, font=large_font, width=3, justify='center')
-input_list[2].grid(row=5, column=5, padx=(0,0), pady=(20, 0))
+input_list['CH_entry'] = Entry(root, font=large_font, width=3, justify='center')
+input_list['CH_entry'].grid(row=5, column=5, padx=(0,0), pady=(20, 0))
 
 DH_entry_desc = Label(root, text="DH")
 DH_entry_desc.grid(row=7,column=4, padx=(20,0), pady=(20, 0))
-input_list[3] = Entry(root, font=large_font, width=3, justify='center')
-input_list[3].grid(row=7, column=5, padx=(0,0), pady=(20, 0))
+input_list['DH_entry'] = Entry(root, font=large_font, width=3, justify='center')
+input_list['DH_entry'].grid(row=7, column=5, padx=(0,0), pady=(20, 0))
 
 #############################  Input Right
 
 AL_entry_desc = Label(root, text="AL")
 AL_entry_desc.grid(row=1,column=7, padx=(20,0), pady=(20, 0))
-input_list[4] = Entry(root, font=large_font, width=3, justify='center')
-input_list[4].grid(row=1, column=8, padx=(0,20), pady=(20, 0))
+input_list['AL_entry'] = Entry(root, font=large_font, width=3, justify='center')
+input_list['AL_entry'].grid(row=1, column=8, padx=(0,20), pady=(20, 0))
 
 BL_entry_desc = Label(root, text="BL")
 BL_entry_desc.grid(row=3,column=7, padx=(20,0), pady=(20, 0))
-input_list[5] = Entry(root, font=large_font, width=3, justify='center')
-input_list[5].grid(row=3, column=8, padx=(0,20), pady=(20, 0))
+input_list['BL_entry'] = Entry(root, font=large_font, width=3, justify='center')
+input_list['BL_entry'].grid(row=3, column=8, padx=(0,20), pady=(20, 0))
 
 CL_entry_desc = Label(root, text="CL")
 CL_entry_desc.grid(row=5,column=7, padx=(20,0), pady=(20, 0))
-input_list[6] = Entry(root, font=large_font, width=3, justify='center')
-input_list[6].grid(row=5, column=8, padx=(0,20), pady=(20, 0))
+input_list['CL_entry'] = Entry(root, font=large_font, width=3, justify='center')
+input_list['CL_entry'].grid(row=5, column=8, padx=(0,20), pady=(20, 0))
 
 DL_entry_desc = Label(root, text="DL")
 DL_entry_desc.grid(row=7,column=7, padx=(20,0), pady=(20, 0))
-input_list[7] = Entry(root, font=large_font, width=3, justify='center')
-input_list[7].grid(row=7, column=8, padx=(0,20), pady=(20, 0))
+input_list['DL_entry'] = Entry(root, font=large_font, width=3, justify='center')
+input_list['DL_entry'].grid(row=7, column=8, padx=(0,20), pady=(20, 0))
 
 ###################################  Radio Button left
 
