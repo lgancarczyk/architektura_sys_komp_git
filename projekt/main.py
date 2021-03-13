@@ -4,12 +4,24 @@ root = Tk()
 root.resizable(width=0, height=0)
 root.title("8086 simulator")
 
+options_list = [ "MOV",
+                 "XCHG"]
+
+                 
+
 var_left= IntVar()
 var_right= IntVar()
+
+var_drop_options = IntVar()
+var_drop_options.set(options_list[0])
 
 large_font = ('Verdana',15)
 middle_font = ('Verdana',11)
 small_font = ('Verdana',10)
+    
+
+def ifitworks():
+    print("xd")
 
 ###########################  Output
 
@@ -123,6 +135,15 @@ DX_btn_right.grid(row=16, column=4, padx=(0,0), pady=(3, 0), sticky="w")
 
 ######################################  Large Buttons
 
+
+drop_options = OptionMenu(root, var_drop_options , *options_list)  # gwiazdka jest potrzebna, inaczej cała lista bedzie wyświetlana jako jedna opcja (1 linijka) 
+drop_options.grid(row=10, column=5,columnspan=1, sticky="w", pady=(40, 0))
+
+create_random_btn = Button(root, text='Random', width=10)
+create_random_btn.grid(row=10, column=7, columnspan=2, pady=(40, 0))
+
+start_btn = Button(root, text='Start', width=10, command=ifitworks)
+start_btn.grid(row=14, column=7, columnspan=2, pady=(3, 0))
 
 
 
