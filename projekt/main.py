@@ -7,7 +7,22 @@ root.title("8086 simulator")
 options_list = [ "MOV",
                  "XCHG"]
 
-                 
+heksadecymalne= {'0000':'0',
+                 '0001':'1',
+                 '0010':'2',
+                 '0011':'3',
+                 '0100':'4',
+                 '0101':'5',
+                 '0110':'6',
+                 '0111':'7',
+                 '1000':'8',
+                 '1001':'9',
+                 '1010':'A',
+                 '1011':'B',
+                 '1100':'C',
+                 '1101':'D',
+                 '1110':'E',
+                 '1111':'F'}                 
 
 var_left= IntVar()
 var_right= IntVar()
@@ -18,12 +33,16 @@ var_drop_options.set(options_list[0])
 large_font = ('Verdana',15)
 middle_font = ('Verdana',11)
 small_font = ('Verdana',10)
+
+##################################  Functions
     
 
 def ifitworks():
     print("xd")
+    
 
-###########################  Output
+
+##################################  Output
 
 AX_output_desc = Label(root, text="AX", font=small_font)
 AX_output_desc.grid(row=1,column=1, padx=(20,0), pady=(20, 0))
