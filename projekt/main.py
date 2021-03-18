@@ -66,10 +66,12 @@ def create_random():
          pair_input = pair1_hex[1]+pair2_hex[1]
          print(pair_input)
 
-         input_list[i]==pair_input
-
          input_list[i].delete(0, END)
          input_list[i].insert(0, pair_input) 
+
+         input_list[i]=END
+         input_list[i]=pair_input
+
          print(input_list[i])
 
         
