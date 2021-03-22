@@ -13,10 +13,9 @@ middle_font = ('Verdana',11)
 small_font = ('Verdana',10)
 
 options_list = [ "MOV",
-                 "XCHG"]
+                "XCHG"]
 
-var_drop_options = IntVar()
-var_drop_options.set(options_list[0])
+
 
 heksadecymalne= {'0000':'0',
                  '0001':'1',
@@ -43,64 +42,64 @@ class Simulator:
     
     def create_random(self):
         for i in self.input_list:
-            print("Random")
+            print("Random_entry")
             pair1_hex = random.choice(list(heksadecymalne.items()))
-            print(pair1_hex[1])
             pair2_hex = random.choice(list(heksadecymalne.items()))
-            print(pair2_hex[1])
 
             pair_input = pair1_hex[1]+pair2_hex[1]
             print(pair_input)
 
             self.input_list[i].delete(0, END)
             self.input_list[i].insert(0, pair_input) 
+       
+        i_output=0
 
-            # self.input_list[i]=END
-            # self.input_list[i]=pair_input
-
-            print(self.input_list[i])
-
-        for i in self.output_list:
+        while i_output <= 3:
+            print("Random_output")
             output_hex = random.choice(list(heksadecymalne.keys()))
-            print(output_hex[0])
-
-            self.output_list[i].delete(0, END)
-            self.output_list[i].insert(0, output_hex) 
-
-            # self.output_list[i]=END
-            # self.output_list[i]=output_hex
-            
+            self.output_list[i_output].delete(0, END)
+            self.output_list[i_output].insert(0, output_hex) 
+            print(output_hex)
+            i_output+=1
+  
 
     def start(self):
         print("Start")
-        
-        print(self.output_list['BX_output'].get())
-   
+        command = self.var_drop_options.get()
+        old_register_radiobtn = self.var_left.get()
+        new_register_radiobtn = self.var_right.get()
+        if command == options_list[0]:
+            print('MOV')
+            self.mov_command(old_register_radiobtn, new_register_radiobtn)
+            
+        elif command == options_list[1]:
+            print('XCHG')
+            self.xchg_command(old_register_radiobtn, new_register_radiobtn)
 
-     
-     
+    def mov_command(self, old, new):
+        new_reg = self.output_list[new].get()
+        self.output_list[old].delete(0, END)
+        self.output_list[old].insert(0, new_reg)
 
-        # print(self.output_list.keys())
-        # for i in self.output_list:
-        #     value = self.output_list[i].get()
-        #     print(value)
-        #     self.output_list[i]=value
-        # print(self.output_list)
+    def xchg_command(self, old, new):
+        old_reg = self.output_list[old].get()
+        new_reg = self.output_list[new].get()
+        self.output_list[old].delete(0, END)
+        self.output_list[old].insert(0, new_reg)
 
-        # print(self.var_left.get())
-
-        
-
-
-        
+        self.output_list[new].delete(0, END)
+        self.output_list[new].insert(0, old_reg)  
 
     def __init__(self, master):
+
+
+        self.var_drop_options = StringVar()
+        self.var_drop_options.set(options_list[0])
 
         self.var_left= IntVar()
         self.var_right= IntVar()
 
-        self.var_drop_options = IntVar()
-        self.var_drop_options.set(options_list[0])
+
 
         self.input_list= {'AH_entry':"",
                         'BH_entry':"", 
@@ -112,11 +111,17 @@ class Simulator:
                         'DL_entry':"",
                         }
 
-        self.output_list= {'AX_output':"",
-                        'BX_output':"",
-                        'CX_output':"",
-                        'DX_output':"",
-                        }
+        # self.output_list= {'AX_output':"",
+        #                 'BX_output':"",
+        #                 'CX_output':"",
+        #                 'DX_output':"",
+        #                 }
+
+        self.output_list= ['AX_output',
+                        'BX_output',
+                        'CX_output',
+                        'DX_output',
+                        ]
         
         self.var_left= IntVar()
         self.var_right= IntVar()
@@ -133,23 +138,23 @@ class Simulator:
 
         self.AX_output_desc = Label(self.output_frame, text="AX", font=middle_font)
         self.AX_output_desc.grid(row=0,column=0, padx=(0,0), pady=(10, 0))
-        self.output_list['AX_output'] = Entry(self.output_frame, font=large_font, width=6, justify='center')
-        self.output_list['AX_output'].grid(row=0, column=1, padx=(0,20), pady=(10, 0))
+        self.output_list[0] = Entry(self.output_frame, font=large_font, width=6, justify='center')
+        self.output_list[0].grid(row=0, column=1, padx=(0,20), pady=(10, 0))
 
         self.BX_output_desc = Label(self.output_frame, text="BX", font=middle_font)
         self.BX_output_desc.grid(row=1,column=0, padx=(0,0), pady=(10, 0))
-        self.output_list['BX_output'] = Entry(self.output_frame, font=large_font, width=6, justify='center')
-        self.output_list['BX_output'].grid(row=1, column=1, padx=(0,20), pady=(10, 0))
+        self.output_list[1] = Entry(self.output_frame, font=large_font, width=6, justify='center')
+        self.output_list[1].grid(row=1, column=1, padx=(0,20), pady=(10, 0))
 
         self.CX_output_desc = Label(self.output_frame, text="CX", font=middle_font)
         self.CX_output_desc.grid(row=2,column=0, padx=(0,0), pady=(10, 0))
-        self.output_list['CX_output'] = Entry(self.output_frame, font=large_font, width=6, justify='center')
-        self.output_list['CX_output'].grid(row=2, column=1, padx=(0,20), pady=(10, 0))
+        self.output_list[2] = Entry(self.output_frame, font=large_font, width=6, justify='center')
+        self.output_list[2].grid(row=2, column=1, padx=(0,20), pady=(10, 0))
 
         self.DX_output_desc = Label(self.output_frame, text="DX", font=middle_font)
         self.DX_output_desc.grid(row=3,column=0, padx=(0,0), pady=(10, 0))
-        self.output_list['DX_output'] = Entry(self.output_frame, font=large_font, width=6, justify='center')
-        self.output_list['DX_output'].grid(row=3, column=1, padx=(0,20), pady=(10, 0))
+        self.output_list[3] = Entry(self.output_frame, font=large_font, width=6, justify='center')
+        self.output_list[3].grid(row=3, column=1, padx=(0,20), pady=(10, 0))
 
         ######################################################### radio buttons frame
 
@@ -255,7 +260,7 @@ class Simulator:
         self.buttons_frame = LabelFrame(self.right_frame, text="buttons", pady=10)
         self.buttons_frame.pack(anchor=E, padx=(0, 10), pady=(20, 0))
 
-        self.drop_options = OptionMenu(self.buttons_frame, var_drop_options , *options_list)  # gwiazdka jest potrzebna, inaczej cała lista bedzie wyświetlana jako jedna opcja (1 linijka) 
+        self.drop_options = OptionMenu(self.buttons_frame, self.var_drop_options , *options_list)  # gwiazdka jest potrzebna, inaczej cała lista bedzie wyświetlana jako jedna opcja (1 linijka) 
         self.drop_options.grid(row=0, column=0,columnspan=1, pady=(0, 0))
 
         self.create_random_btn = Button(self.buttons_frame, text='Random', width=10, command=lambda : self.create_random())
