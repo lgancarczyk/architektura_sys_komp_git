@@ -3,7 +3,7 @@ import random
 
 
 root=Tk()
-root.title(f"8086 simulator")
+root.title("8086 simulator")
 width=400
 height=400
 root.geometry(f"{width}x{height}")
@@ -59,14 +59,32 @@ class Simulator:
             self.input_list[i].delete(0, END)
             self.input_list[i].insert(0, pair_input) 
 
-            self.input_list[i]=END
-            self.input_list[i]=pair_input
+            # self.input_list[i]=END
+            # self.input_list[i]=pair_input
 
             print(self.input_list[i])
 
+        for i in self.output_list:
+            output_hex = random.choice(list(heksadecymalne.keys()))
+            print(output_hex[0])
+
+            self.output_list[i].delete(0, END)
+            self.output_list[i].insert(0, output_hex) 
+
+            # self.output_list[i]=END
+            # self.output_list[i]=output_hex
+            
+
     def start(self):
         print("Start")
-        print(self.input_list)
+
+        for i in self.input_list:
+            print(self.input_list[i].get())
+
+        
+
+
+        
 
     def __init__(self, master):
 
@@ -79,11 +97,17 @@ class Simulator:
                         'CL_entry':"",
                         'DL_entry':"",
                         }
+
+        self.output_list= {'AX_output':"",
+                        'BX_output':"",
+                        'CX_output':"",
+                        'DX_output':"",
+                        }
         
         self.var_left= IntVar()
         self.var_right= IntVar()
 
-        ############################################################################### right frame
+        ############################################################################### left frame
 
         self.left_frame = Frame(master)
         self.left_frame.pack(side=LEFT, anchor=N)
@@ -95,23 +119,23 @@ class Simulator:
 
         self.AX_output_desc = Label(self.output_frame, text="AX", font=middle_font)
         self.AX_output_desc.grid(row=0,column=0, padx=(0,0), pady=(10, 0))
-        self.AX_output = Entry(self.output_frame, font=large_font, width=6, justify='center', state="readonly")
-        self.AX_output.grid(row=0, column=1, padx=(0,20), pady=(10, 0))
+        self.output_list['AX_output'] = Entry(self.output_frame, font=large_font, width=6, justify='center')
+        self.output_list['AX_output'].grid(row=0, column=1, padx=(0,20), pady=(10, 0))
 
         self.BX_output_desc = Label(self.output_frame, text="BX", font=middle_font)
         self.BX_output_desc.grid(row=1,column=0, padx=(0,0), pady=(10, 0))
-        self.BX_output = Entry(self.output_frame, font=large_font, width=6, justify='center', state="readonly")
-        self.BX_output.grid(row=1, column=1, padx=(0,20), pady=(10, 0))
+        self.output_list['BX_output'] = Entry(self.output_frame, font=large_font, width=6, justify='center')
+        self.output_list['BX_output'].grid(row=1, column=1, padx=(0,20), pady=(10, 0))
 
         self.CX_output_desc = Label(self.output_frame, text="CX", font=middle_font)
         self.CX_output_desc.grid(row=2,column=0, padx=(0,0), pady=(10, 0))
-        self.CX_output = Entry(self.output_frame, font=large_font, width=6, justify='center', state="readonly")
-        self.CX_output.grid(row=2, column=1, padx=(0,20), pady=(10, 0))
+        self.output_list['CX_output'] = Entry(self.output_frame, font=large_font, width=6, justify='center')
+        self.output_list['CX_output'].grid(row=2, column=1, padx=(0,20), pady=(10, 0))
 
-        self.CX_output_desc = Label(self.output_frame, text="DX", font=middle_font)
-        self.CX_output_desc.grid(row=3,column=0, padx=(0,0), pady=(10, 0))
-        self.CX_output = Entry(self.output_frame, font=large_font, width=6, justify='center', state="readonly")
-        self.CX_output.grid(row=3, column=1, padx=(0,20), pady=(10, 0))
+        self.DX_output_desc = Label(self.output_frame, text="DX", font=middle_font)
+        self.DX_output_desc.grid(row=3,column=0, padx=(0,0), pady=(10, 0))
+        self.output_list['DX_output'] = Entry(self.output_frame, font=large_font, width=6, justify='center')
+        self.output_list['DX_output'].grid(row=3, column=1, padx=(0,20), pady=(10, 0))
 
         ######################################################### radio buttons frame
 
