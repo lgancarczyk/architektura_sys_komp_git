@@ -12,6 +12,30 @@ large_font = ('Verdana',15)
 middle_font = ('Verdana',11)
 small_font = ('Verdana',10)
 
+options_list = [ "MOV",
+                 "XCHG"]
+
+var_drop_options = IntVar()
+var_drop_options.set(options_list[0])
+
+heksadecymalne= {'0000':'0',
+                 '0001':'1',
+                 '0010':'2',
+                 '0011':'3',
+                 '0100':'4',
+                 '0101':'5',
+                 '0110':'6',
+                 '0111':'7',
+                 '1000':'8',
+                 '1001':'9',
+                 '1010':'A',
+                 '1011':'B',
+                 '1100':'C',
+                 '1101':'D',
+                 '1110':'E',
+                 '1111':'F',
+                 }   
+
 class Simulator:
 
     # var_left= IntVar()
@@ -20,17 +44,19 @@ class Simulator:
     # var_drop_options = IntVar()
     # var_drop_options.set(options_list[0])
 
-    input_list= {'AH_entry':"",
-                'BH_entry':"", 
-                'CH_entry':"", 
-                'DH_entry':"",
-                'AL_entry':"",
-                'BL_entry':"",
-                'CL_entry':"",
-                'DL_entry':"",
-                }
+    
 
     def __init__(self, master):
+
+        self.input_list= {'AH_entry':"",
+                        'BH_entry':"", 
+                        'CH_entry':"", 
+                        'DH_entry':"",
+                        'AL_entry':"",
+                        'BL_entry':"",
+                        'CL_entry':"",
+                        'DL_entry':"",
+                        }
         
         self.var_left= IntVar()
         self.var_right= IntVar()
@@ -107,7 +133,7 @@ class Simulator:
         self.input_list['DL_entry'] = Entry(self.entry_frame, font=large_font, width=3, justify='center')
         self.input_list['DL_entry'].grid(row=3, column=3, padx=(0,20), pady=(10, 0))
 
-        ######################################################### input frame
+        ######################################################### radio buttons frame
 
         self.radio_buttons_frame = LabelFrame(master, text="radio_buttons", pady=10)
         self.radio_buttons_frame.pack(side=LEFT,anchor=S, padx=(0, 10))
@@ -154,6 +180,19 @@ class Simulator:
         self.DX_btn_right = Radiobutton(self.radio_buttons_frame, variable=self.var_right, value=3)
         self.DX_btn_right.grid(row=3, column=3, padx=(0,20), pady=(10, 0))
         
+        ######################################################### buttons frame
+
+        self.buttons_frame = LabelFrame(master, text="buttons", pady=10)
+        self.buttons_frame.pack(side=RIGHT,anchor=S, padx=(0, 10))
+
+        self.drop_options = OptionMenu(self.buttons_frame, var_drop_options , *options_list)  # gwiazdka jest potrzebna, inaczej cała lista bedzie wyświetlana jako jedna opcja (1 linijka) 
+        self.drop_options.grid(row=0, column=0,columnspan=1, sticky="w", pady=(0, 0))
+
+        self.create_random_btn = Button(self.buttons_frame, text='Random', width=10)
+        self.create_random_btn.grid(row=0, column=1, pady=(0, 0))
+
+        self.start_btn = Button(self.buttons_frame, text='Start', width=10)
+        self.start_btn.grid(row=1, column=0, pady=(0, 0))
 
 
 
