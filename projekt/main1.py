@@ -3,9 +3,9 @@ import random
 
 
 root=Tk()
-root.title("8086 simulator")
-width=600
-height=500
+root.title(f"8086 simulator")
+width=400
+height=400
 root.geometry(f"{width}x{height}")
 
 large_font = ('Verdana',15)
@@ -45,6 +45,28 @@ class Simulator:
     # var_drop_options.set(options_list[0])
 
     
+    def create_random(self):
+        for i in self.input_list:
+            print("Random")
+            pair1_hex = random.choice(list(heksadecymalne.items()))
+            print(pair1_hex[1])
+            pair2_hex = random.choice(list(heksadecymalne.items()))
+            print(pair2_hex[1])
+
+            pair_input = pair1_hex[1]+pair2_hex[1]
+            print(pair_input)
+
+            self.input_list[i].delete(0, END)
+            self.input_list[i].insert(0, pair_input) 
+
+            self.input_list[i]=END
+            self.input_list[i]=pair_input
+
+            print(self.input_list[i])
+
+    def start(self):
+        print("Start")
+        print(self.input_list)
 
     def __init__(self, master):
 
@@ -61,82 +83,40 @@ class Simulator:
         self.var_left= IntVar()
         self.var_right= IntVar()
 
+        ############################################################################### right frame
+
+        self.left_frame = Frame(master)
+        self.left_frame.pack(side=LEFT, anchor=N)
+
         ######################################################### output frame
 
-        self.output_frame = LabelFrame(master, text="output_frame", pady=10)
-        self.output_frame.pack(side=LEFT, anchor=N, padx=(10,0))
+        self.output_frame = LabelFrame(self.left_frame, text="output_frame", pady=10)
+        self.output_frame.pack(anchor=W, padx=(10,0))
 
         self.AX_output_desc = Label(self.output_frame, text="AX", font=middle_font)
         self.AX_output_desc.grid(row=0,column=0, padx=(0,0), pady=(10, 0))
-        self.AX_output = Entry(self.output_frame, font=large_font, width=6, justify='center', state="disabled")
+        self.AX_output = Entry(self.output_frame, font=large_font, width=6, justify='center', state="readonly")
         self.AX_output.grid(row=0, column=1, padx=(0,20), pady=(10, 0))
 
         self.BX_output_desc = Label(self.output_frame, text="BX", font=middle_font)
         self.BX_output_desc.grid(row=1,column=0, padx=(0,0), pady=(10, 0))
-        self.BX_output = Entry(self.output_frame, font=large_font, width=6, justify='center', state="disabled")
+        self.BX_output = Entry(self.output_frame, font=large_font, width=6, justify='center', state="readonly")
         self.BX_output.grid(row=1, column=1, padx=(0,20), pady=(10, 0))
 
         self.CX_output_desc = Label(self.output_frame, text="CX", font=middle_font)
         self.CX_output_desc.grid(row=2,column=0, padx=(0,0), pady=(10, 0))
-        self.CX_output = Entry(self.output_frame, font=large_font, width=6, justify='center', state="disabled")
+        self.CX_output = Entry(self.output_frame, font=large_font, width=6, justify='center', state="readonly")
         self.CX_output.grid(row=2, column=1, padx=(0,20), pady=(10, 0))
 
         self.CX_output_desc = Label(self.output_frame, text="DX", font=middle_font)
         self.CX_output_desc.grid(row=3,column=0, padx=(0,0), pady=(10, 0))
-        self.CX_output = Entry(self.output_frame, font=large_font, width=6, justify='center', state="disabled")
+        self.CX_output = Entry(self.output_frame, font=large_font, width=6, justify='center', state="readonly")
         self.CX_output.grid(row=3, column=1, padx=(0,20), pady=(10, 0))
-
-        ######################################################### input frame
-
-        self.entry_frame = LabelFrame(master, text="entry_frame", pady=10)
-        self.entry_frame.pack(side=RIGHT,anchor=N, padx=(0, 10))
-
-        ########## left side
-        self.AH_entry_desc = Label(self.entry_frame, text="AH")
-        self.AH_entry_desc.grid(row=0, column=0, padx=(0,0), pady=(10, 0))
-        self.input_list['AH_entry'] = Entry(self.entry_frame, font=large_font, width=3, justify='center')
-        self.input_list['AH_entry'].grid(row=0, column=1, padx=(0,40), pady=(10, 0))
-
-        self.BH_entry_desc = Label(self.entry_frame, text="BH")
-        self.BH_entry_desc.grid(row=1, column=0, padx=(0,0), pady=(10, 0))
-        self.input_list['BH_entry'] = Entry(self.entry_frame, font=large_font, width=3, justify='center')
-        self.input_list['BH_entry'].grid(row=1, column=1, padx=(0,40), pady=(10, 0))
-
-        self.CH_entry_desc = Label(self.entry_frame, text="CH")
-        self.CH_entry_desc.grid(row=2, column=0, padx=(0,0), pady=(10, 0))
-        self.input_list['CH_entry'] = Entry(self.entry_frame, font=large_font, width=3, justify='center')
-        self.input_list['CH_entry'].grid(row=2, column=1, padx=(0,40), pady=(10, 0))
-
-        self.DH_entry_desc = Label(self.entry_frame, text="DH")
-        self.DH_entry_desc.grid(row=3, column=0, padx=(0,0), pady=(10, 0))
-        self.input_list['DH_entry'] = Entry(self.entry_frame, font=large_font, width=3, justify='center')
-        self.input_list['DH_entry'].grid(row=3, column=1, padx=(0,40), pady=(10, 0))
-
-        ########## right side
-        self.AL_entry_desc = Label(self.entry_frame, text="AL")
-        self.AL_entry_desc.grid(row=0, column=2, padx=(0,0), pady=(10, 0))
-        self.input_list['AL_entry'] = Entry(self.entry_frame, font=large_font, width=3, justify='center')
-        self.input_list['AL_entry'].grid(row=0, column=3, padx=(0,20), pady=(10, 0))
-
-        self.BL_entry_desc = Label(self.entry_frame, text="BL")
-        self.BL_entry_desc.grid(row=1, column=2, padx=(0,0), pady=(10, 0))
-        self.input_list['BL_entry'] = Entry(self.entry_frame, font=large_font, width=3, justify='center')
-        self.input_list['BL_entry'].grid(row=1, column=3, padx=(0,20), pady=(10, 0))
-
-        self.CL_entry_desc = Label(self.entry_frame, text="CL")
-        self.CL_entry_desc.grid(row=2, column=2, padx=(0,0), pady=(10, 0))
-        self.input_list['CL_entry'] = Entry(self.entry_frame, font=large_font, width=3, justify='center')
-        self.input_list['CL_entry'].grid(row=2, column=3, padx=(0,20), pady=(10, 0))
-
-        self.DL_entry_desc = Label(self.entry_frame, text="DL")
-        self.DL_entry_desc.grid(row=3, column=2, padx=(0,0), pady=(10, 0))
-        self.input_list['DL_entry'] = Entry(self.entry_frame, font=large_font, width=3, justify='center')
-        self.input_list['DL_entry'].grid(row=3, column=3, padx=(0,20), pady=(10, 0))
 
         ######################################################### radio buttons frame
 
-        self.radio_buttons_frame = LabelFrame(master, text="radio_buttons", pady=10)
-        self.radio_buttons_frame.pack(side=LEFT,anchor=S, padx=(0, 10))
+        self.radio_buttons_frame = LabelFrame(self.left_frame, text="radio_buttons", pady=10)
+        self.radio_buttons_frame.pack(anchor=W,padx=(10, 0), pady=(20, 0))
 
         ########## left side
         self.AX_btn_left_desc = Label(self.radio_buttons_frame, text="AX", font=middle_font)
@@ -179,20 +159,72 @@ class Simulator:
         self.DX_btn_right_desc.grid(row=3,column=2, padx=(0,0), pady=(10, 0))
         self.DX_btn_right = Radiobutton(self.radio_buttons_frame, variable=self.var_right, value=3)
         self.DX_btn_right.grid(row=3, column=3, padx=(0,20), pady=(10, 0))
+
+        ############################################################################### right frame
+
+        self.right_frame = Frame(master)
+        self.right_frame.pack(side=RIGHT, anchor=N)
+
+        ######################################################### input frame
+
+        self.entry_frame = LabelFrame(self.right_frame, text="entry_frame", pady=10)
+        self.entry_frame.pack(anchor=E,padx=(0, 10))
+
+        ########## left side
+        self.AH_entry_desc = Label(self.entry_frame, text="AH")
+        self.AH_entry_desc.grid(row=0, column=0, padx=(0,0), pady=(10, 0))
+        self.input_list['AH_entry'] = Entry(self.entry_frame, font=large_font, width=3, justify='center')
+        self.input_list['AH_entry'].grid(row=0, column=1, padx=(0,40), pady=(10, 0))
+
+        self.BH_entry_desc = Label(self.entry_frame, text="BH")
+        self.BH_entry_desc.grid(row=1, column=0, padx=(0,0), pady=(10, 0))
+        self.input_list['BH_entry'] = Entry(self.entry_frame, font=large_font, width=3, justify='center')
+        self.input_list['BH_entry'].grid(row=1, column=1, padx=(0,40), pady=(10, 0))
+
+        self.CH_entry_desc = Label(self.entry_frame, text="CH")
+        self.CH_entry_desc.grid(row=2, column=0, padx=(0,0), pady=(10, 0))
+        self.input_list['CH_entry'] = Entry(self.entry_frame, font=large_font, width=3, justify='center')
+        self.input_list['CH_entry'].grid(row=2, column=1, padx=(0,40), pady=(10, 0))
+
+        self.DH_entry_desc = Label(self.entry_frame, text="DH")
+        self.DH_entry_desc.grid(row=3, column=0, padx=(0,0), pady=(10, 0))
+        self.input_list['DH_entry'] = Entry(self.entry_frame, font=large_font, width=3, justify='center')
+        self.input_list['DH_entry'].grid(row=3, column=1, padx=(0,40), pady=(10, 0))
+
+        ########## right side
+        self.AL_entry_desc = Label(self.entry_frame, text="AL")
+        self.AL_entry_desc.grid(row=0, column=2, padx=(0,0), pady=(10, 0))
+        self.input_list['AL_entry'] = Entry(self.entry_frame, font=large_font, width=3, justify='center')
+        self.input_list['AL_entry'].grid(row=0, column=3, padx=(0,20), pady=(10, 0))
+
+        self.BL_entry_desc = Label(self.entry_frame, text="BL")
+        self.BL_entry_desc.grid(row=1, column=2, padx=(0,0), pady=(10, 0))
+        self.input_list['BL_entry'] = Entry(self.entry_frame, font=large_font, width=3, justify='center')
+        self.input_list['BL_entry'].grid(row=1, column=3, padx=(0,20), pady=(10, 0))
+
+        self.CL_entry_desc = Label(self.entry_frame, text="CL")
+        self.CL_entry_desc.grid(row=2, column=2, padx=(0,0), pady=(10, 0))
+        self.input_list['CL_entry'] = Entry(self.entry_frame, font=large_font, width=3, justify='center')
+        self.input_list['CL_entry'].grid(row=2, column=3, padx=(0,20), pady=(10, 0))
+
+        self.DL_entry_desc = Label(self.entry_frame, text="DL")
+        self.DL_entry_desc.grid(row=3, column=2, padx=(0,0), pady=(10, 0))
+        self.input_list['DL_entry'] = Entry(self.entry_frame, font=large_font, width=3, justify='center')
+        self.input_list['DL_entry'].grid(row=3, column=3, padx=(0,20), pady=(10, 0))
         
         ######################################################### buttons frame
 
-        self.buttons_frame = LabelFrame(master, text="buttons", pady=10)
-        self.buttons_frame.pack(side=RIGHT,anchor=S, padx=(0, 10))
+        self.buttons_frame = LabelFrame(self.right_frame, text="buttons", pady=10)
+        self.buttons_frame.pack(anchor=E, padx=(0, 10), pady=(20, 0))
 
         self.drop_options = OptionMenu(self.buttons_frame, var_drop_options , *options_list)  # gwiazdka jest potrzebna, inaczej cała lista bedzie wyświetlana jako jedna opcja (1 linijka) 
-        self.drop_options.grid(row=0, column=0,columnspan=1, sticky="w", pady=(0, 0))
+        self.drop_options.grid(row=0, column=0,columnspan=1, pady=(0, 0))
 
-        self.create_random_btn = Button(self.buttons_frame, text='Random', width=10)
+        self.create_random_btn = Button(self.buttons_frame, text='Random', width=10, command=lambda : self.create_random())
         self.create_random_btn.grid(row=0, column=1, pady=(0, 0))
 
-        self.start_btn = Button(self.buttons_frame, text='Start', width=10)
-        self.start_btn.grid(row=1, column=0, pady=(0, 0))
+        self.start_btn = Button(self.buttons_frame, text='Start', width=10, command=lambda : self.start())
+        self.start_btn.grid(row=1, column=1, pady=(0, 0))
 
 
 
