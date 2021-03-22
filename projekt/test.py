@@ -74,8 +74,9 @@ class Simulator:
     def start(self):
         print("Start")
         
-        print(self.output_list['BX_output'].get())
-   
+        cc=list(self.output_list.keys())
+        cd = cc[1]
+        print(cd)
 
      
      
@@ -133,8 +134,8 @@ class Simulator:
 
         self.AX_output_desc = Label(self.output_frame, text="AX", font=middle_font)
         self.AX_output_desc.grid(row=0,column=0, padx=(0,0), pady=(10, 0))
-        self.output_list['AX_output'] = Entry(self.output_frame, font=large_font, width=6, justify='center')
-        self.output_list['AX_output'].grid(row=0, column=1, padx=(0,20), pady=(10, 0))
+        self.BX_output = Entry(self.output_frame, font=large_font, width=6, justify='center')
+        self.BX_output.grid(row=0, column=1, padx=(0,20), pady=(10, 0))
 
         self.BX_output_desc = Label(self.output_frame, text="BX", font=middle_font)
         self.BX_output_desc.grid(row=1,column=0, padx=(0,0), pady=(10, 0))
