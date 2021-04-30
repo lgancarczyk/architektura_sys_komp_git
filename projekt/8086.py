@@ -1,5 +1,5 @@
 import tkinter as tk
-from random import*
+import random
 
 
 
@@ -30,19 +30,45 @@ class Application(tk.Frame):
             pass
 
 
-    def random(self):
+    def Random(self):
         print("Random")
-        print(self.input_list)
-        for i in self.input_list:
-            print(i)
-            random_number = random.randint(0,16777215)
-            hex_num = hex(random_number)
+        for i in range(0, len(self.input_list)-1):
+            hex_num =  hex(random.getrandbits(16))[2:].upper()
+            while len(hex_num)<4:
+                hex_num = "0"+hex_num
             print(hex_num)
-            self.input_list[i].tk.delete(0, END)
-            self.input_list[i].tk.insert(0, hex_num) 
+            self.input_list[i].delete(0, tk.END)
+            self.input_list[i].insert(0, hex_num) 
 
+    def Reset(self):
+        print("Reset")
+        for i in range(0, len(self.input_list)-1):
+            
+            self.input_list[i].delete(0, tk.END)
+            self.input_list[i].insert(0, "0000") 
 
+    def simple_mov(self):
+        print("simple MOV")
+        old_register_radiobtn = self.var_right.get()
+        new_register_radiobtn = self.var_left.get()
 
+        new_reg = self.input_list[new_register_radiobtn].get()
+        self.input_list[old_register_radiobtn].delete(0, tk.END)
+        self.input_list[old_register_radiobtn].insert(0, new_reg)
+
+    def simple_xchg(self):
+        print("simple XCHG")
+        old_register_radiobtn = self.var_right.get()
+        new_register_radiobtn = self.var_left.get()
+
+        new_reg = self.input_list[new_register_radiobtn].get()
+        old_reg = self.input_list[old_register_radiobtn].get()
+        
+        self.input_list[old_register_radiobtn].delete(0, tk.END)
+        self.input_list[old_register_radiobtn].insert(0, new_reg)
+
+        self.input_list[new_register_radiobtn].delete(0, tk.END)
+        self.input_list[new_register_radiobtn].insert(0, old_reg)
 
 
 
@@ -57,8 +83,7 @@ class Application(tk.Frame):
                         'DI_input',
                         'BP_input',
                         'DISP_input',
-                        'SP_input'
-                        ]
+                        'SP_input']
         self.var_left= tk.IntVar()
         self.var_right= tk.IntVar()
 
@@ -69,14 +94,14 @@ class Application(tk.Frame):
         self.var_right_vertical_frame_indeksowo_bazowy= tk.IntVar()
 
         self.mode_list = [ "Indeksowy",
-                    "Bazowy",
-                    "Indeksowo-Bazowy"]
+                           "Bazowy",
+                           "Indeksowo-Bazowy"]
                     
         self.var_mode_options = tk.StringVar()
         self.var_mode_options.set(self.mode_list[0])
 
         self.memory_mode_list = ["Z pamieci do rejestru",
-                            "Z rejestru do pamieci"]
+                                "Z rejestru do pamieci"]
 
         self.var_memory_mode_options = tk.StringVar()
         self.var_memory_mode_options.set(self.memory_mode_list[1])
@@ -101,10 +126,10 @@ class Application(tk.Frame):
         self.reset_random_frame = tk.LabelFrame(self.vertical_frame_left)
         self.reset_random_frame.grid(row=0, column=0)
 
-        self.create_random_btn = tk.Button(self.reset_random_frame, text='Random', width=10, command=lambda : print("Random")) #self.create_random()
+        self.create_random_btn = tk.Button(self.reset_random_frame, text='Random', width=10, command=lambda : self.Random()) #self.create_random()
         self.create_random_btn.grid(row=0, column=0, pady=(0, 0), padx=(0, 20))
 
-        self.reset_btn = tk.Button(self.reset_random_frame, text='Reset', width=10, command=lambda : print("Reset")) #self.create_random()
+        self.reset_btn = tk.Button(self.reset_random_frame, text='Reset', width=10, command=lambda : self.Reset()) #self.create_random()
         self.reset_btn.grid(row=0, column=1, pady=(0, 0), padx=(20, 0))
 
         ######################################################### input frame
@@ -217,10 +242,10 @@ class Application(tk.Frame):
         self.mov_xchg_left_vertical_frame = tk.LabelFrame(self.vertical_frame_left)
         self.mov_xchg_left_vertical_frame.grid(row=3, column=0)
 
-        self.mov_left_vertical_frame_btn = tk.Button(self.mov_xchg_left_vertical_frame, text='MOV', width=10, command=lambda : print("MOV left")) #self.start()
+        self.mov_left_vertical_frame_btn = tk.Button(self.mov_xchg_left_vertical_frame, text='MOV', width=10, command=lambda : self.simple_mov()) #self.start()
         self.mov_left_vertical_frame_btn.grid(row=0, column=0, pady=(0, 0), padx=(0, 20))
 
-        self.xchg_left_vertical_frame_btn = tk.Button(self.mov_xchg_left_vertical_frame, text='XCHG', width=10, command=lambda : print("XCHG left")) #self.start()
+        self.xchg_left_vertical_frame_btn = tk.Button(self.mov_xchg_left_vertical_frame, text='XCHG', width=10, command=lambda : self.simple_xchg()) #self.start()
         self.xchg_left_vertical_frame_btn.grid(row=0, column=1, pady=(0, 0), padx=(20, 0))
 
 
