@@ -1,4 +1,5 @@
 import tkinter as tk
+from random import*
 
 
 
@@ -29,6 +30,19 @@ class Application(tk.Frame):
             pass
 
 
+    def random(self):
+        print("Random")
+        print(self.input_list)
+        for i in self.input_list:
+            print(i)
+            random_number = random.randint(0,16777215)
+            hex_num = hex(random_number)
+            print(hex_num)
+            self.input_list[i].tk.delete(0, END)
+            self.input_list[i].tk.insert(0, hex_num) 
+
+
+
 
 
 
@@ -42,8 +56,8 @@ class Application(tk.Frame):
                         'SI_input',
                         'DI_input',
                         'BP_input',
-                        'SP_input',
-                        'DISP_input'
+                        'DISP_input',
+                        'SP_input'
                         ]
         self.var_left= tk.IntVar()
         self.var_right= tk.IntVar()
@@ -133,15 +147,21 @@ class Application(tk.Frame):
         self.input_list[6] = tk.Entry(self.upper_input, font=large_font, width=6, justify='center')
         self.input_list[6].grid(row=2, column=3, padx=(0,20), pady=(10, 0))
 
-        self.SP_input_desc = tk.Label(self.upper_input, text="SP", font=middle_font)
-        self.SP_input_desc.grid(row=3,column=2, padx=(0,0), pady=(10, 0))
+        self.DISP_input_desc = tk.Label(self.upper_input, text="DISP", font=middle_font)
+        self.DISP_input_desc.grid(row=3,column=2, padx=(0,0), pady=(10, 0))
         self.input_list[7] = tk.Entry(self.upper_input, font=large_font, width=6, justify='center')
         self.input_list[7].grid(row=3, column=3, padx=(0,20), pady=(10, 0))
 
-        self.DISP_input_desc = tk.Label(self.upper_input, text="DISP", font=middle_font)
-        self.DISP_input_desc.grid(row=4,column=2, padx=(0,0), pady=(10, 0))
-        self.input_list[8] = tk.Entry(self.upper_input, font=large_font, width=6, justify='center')
-        self.input_list[8].grid(row=4, column=3, padx=(0,20), pady=(10, 0))
+
+        self.lower_input = tk.Frame(self.input_frame)
+        self.lower_input.grid(row=1, column=0)
+
+        self.SP_input_desc = tk.Label(self.lower_input, text="SP", font=middle_font)
+        self.SP_input_desc.grid(row=0,column=0, padx=(0,0), pady=(10, 0))
+        self.input_list[8] = tk.Entry(self.lower_input, font=large_font, width=6, justify='center')
+        self.input_list[8].grid(row=0, column=1, padx=(0,20), pady=(10, 0))
+
+        
         
 
         ######################################################### radiobuttons left vertical frame
