@@ -12,7 +12,21 @@ class Application(tk.Frame):
     def track_mode_list(self, event):
         
         print(event)
-        pass
+        if event=="Indeksowy":
+            self.right_vertical_frame_radio_all_left_bazowy.grid_remove()
+            self.right_vertical_frame_radio_all_left_indeksowo_bazowy.grid_remove()
+            self.right_vertical_frame_radio_all_left_indeksowy.grid(row=0, column=0)
+            pass
+        if event=="Bazowy":
+            self.right_vertical_frame_radio_all_left_indeksowy.grid_remove()
+            self.right_vertical_frame_radio_all_left_indeksowo_bazowy.grid_remove()
+            self.right_vertical_frame_radio_all_left_bazowy.grid(row=0, column=0)
+            pass
+        if event=="Indeksowo-Bazowy":
+            self.right_vertical_frame_radio_all_left_indeksowy.grid_remove()
+            self.right_vertical_frame_radio_all_left_bazowy.grid_remove()
+            self.right_vertical_frame_radio_all_left_indeksowo_bazowy.grid(row=0, column=0)
+            pass
 
 
 
@@ -228,7 +242,7 @@ class Application(tk.Frame):
         ###### bazowy
 
         self.right_vertical_frame_radio_all_left_bazowy = tk.Frame(self.right_vertical_frame_radio_all)
-        self.right_vertical_frame_radio_all_left_bazowy.grid(row=1, column=0)
+        #self.right_vertical_frame_radio_all_left_bazowy.grid(row=1, column=0)
 
         self.BX_btn_desc = tk.Label(self.right_vertical_frame_radio_all_left_bazowy, text="BX", font=middle_font)
         self.BX_btn_desc.grid(row=0,column=0, padx=(0,0), pady=(10, 0))
@@ -243,7 +257,7 @@ class Application(tk.Frame):
         ###### indeksowo bazowy
 
         self.right_vertical_frame_radio_all_left_indeksowo_bazowy = tk.Frame(self.right_vertical_frame_radio_all)
-        self.right_vertical_frame_radio_all_left_indeksowo_bazowy.grid(row=2, column=0)
+        #self.right_vertical_frame_radio_all_left_indeksowo_bazowy.grid(row=2, column=0)
 
         self.SI_BX_btn_desc = tk.Label(self.right_vertical_frame_radio_all_left_indeksowo_bazowy, text="SI BX", font=middle_font)
         self.SI_BX_btn_desc.grid(row=0,column=0, padx=(0,0), pady=(10, 0))
@@ -292,11 +306,38 @@ class Application(tk.Frame):
         self.DX_btn_right_vertical = tk.Radiobutton(self.right_vertical_frame_radio_all_right, variable=self.var_right_vertical_frame_rejestr, value=3)
         self.DX_btn_right_vertical.grid(row=3, column=1, padx=(0,30), pady=(10, 0))
 
+        ######################################################### right vertical MOV XCHG
 
+        self.right_vertical_frame_mov_xchg = tk.Frame(self.vertical_frame_right)
+        self.right_vertical_frame_mov_xchg.grid(row=3, column=0)
 
+        self.mov_right_vertical_frame_btn = tk.Button(self.right_vertical_frame_mov_xchg, text='MOV', width=10, command=lambda : print("MOV right")) #self.start()
+        self.mov_right_vertical_frame_btn.grid(row=0, column=0, pady=(0, 0), padx=(0, 20))
 
+        self.xchg_right_vertical_frame_btn = tk.Button(self.right_vertical_frame_mov_xchg, text='XCHG', width=10, command=lambda : print("XCHG right")) #self.start()
+        self.xchg_right_vertical_frame_btn.grid(row=0, column=1, pady=(0, 0), padx=(20, 0))
 
+        #########################################################  push pop
 
+        self.right_vertical_frame_push_pop = tk.Frame(self.vertical_frame_right)
+        self.right_vertical_frame_push_pop.grid(row=4, column=0)
+
+        self.push_right_vertical_frame_btn = tk.Button(self.right_vertical_frame_push_pop, text='PUSH', width=10, command=lambda : print("PUSH right")) #self.start()
+        self.push_right_vertical_frame_btn.grid(row=0, column=0, pady=(0, 0), padx=(0, 20))
+
+        self.pop_right_vertical_frame_btn = tk.Button(self.right_vertical_frame_push_pop, text='POP', width=10, command=lambda : print("POP right")) #self.start()
+        self.pop_right_vertical_frame_btn.grid(row=0, column=1, pady=(0, 0), padx=(20, 0))
+
+        #########################################################  clear clear
+
+        self.right_vertical_frame_clear = tk.Frame(self.vertical_frame_right)
+        self.right_vertical_frame_clear.grid(row=5, column=0)
+
+        self.clear_memory_right_vertical_frame_btn = tk.Button(self.right_vertical_frame_clear, text='Clear Memory', width=10, command=lambda : print("Mlear Memory")) #self.start()
+        self.clear_memory_right_vertical_frame_btn.grid(row=0, column=0, pady=(0, 0), padx=(0, 20))
+
+        self.clear_stack_right_vertical_frame_btn = tk.Button(self.right_vertical_frame_clear, text='Clear Stack', width=10, command=lambda : print("Clear Stack")) #self.start()
+        self.clear_stack_right_vertical_frame_btn.grid(row=0, column=1, pady=(0, 0), padx=(20, 0))
 
 
 
