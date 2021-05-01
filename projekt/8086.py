@@ -64,7 +64,6 @@ class Application(tk.Frame):
             hex_num =  hex(random.getrandbits(16))[2:].upper()
             while len(hex_num)<4:
                 hex_num = "0"+hex_num
-            print(hex_num)
             self.input_list[i].delete(0, tk.END)
             self.input_list[i].insert(0, hex_num) 
 
@@ -77,8 +76,8 @@ class Application(tk.Frame):
 
     def simple_mov(self):
         print("simple MOV")
-        old_register_radiobtn = self.var_right.get()
-        new_register_radiobtn = self.var_left.get()
+        old_register_radiobtn = self.var_left.get()
+        new_register_radiobtn = self.var_right.get()
 
         new_reg = self.input_list[new_register_radiobtn].get()
         self.input_list[old_register_radiobtn].delete(0, tk.END)
@@ -100,6 +99,7 @@ class Application(tk.Frame):
 
     def Extended_mov(self):
         mode = self.var_mode_options.get()
+        print("Extended MOV")
         print(mode)
         disp = self.input_list[7].get()
 
@@ -163,6 +163,7 @@ class Application(tk.Frame):
 
     def Extended_xchg(self):
         mode = self.var_mode_options.get()
+        print("Extended XCHG")
         print(mode)
         disp = self.input_list[7].get()
 
@@ -221,6 +222,12 @@ class Application(tk.Frame):
             print("Place in Memory is Out of Range")
             
             messagebox.showinfo("Error", "Out of stack range!!")
+
+        elif wielkosc != len(self.stack_tab):
+            print("Place in Memory is Out of Range")
+            
+            messagebox.showinfo("Error", "Wrong Entries!!")
+            
         else:
             rejestr = self.var_right_vertical_frame_rejestr.get()
             hex_str_z_input = self.input_list[rejestr].get()
@@ -236,6 +243,7 @@ class Application(tk.Frame):
             self.input_list[8].insert(0, hex_z_stosu) 
 
     def Pop(self):
+        print("Pop")
         rejestr = self.var_right_vertical_frame_rejestr.get()
 
         wielkosc = self.hex_to_int(self.input_list[8].get())
@@ -248,7 +256,7 @@ class Application(tk.Frame):
         elif wielkosc != len(self.stack_tab):
             print("Place in Memory is Out of Range")
             
-            messagebox.showinfo("Error", "Wrong Entrys!!")
+            messagebox.showinfo("Error", "Wrong Entries!!")
  
 
         else:
@@ -268,9 +276,11 @@ class Application(tk.Frame):
             self.input_list[8].insert(0, hex_z_stosu) 
 
     def clear_memory(self):
+        print("Clear Memory")
         self.memory_tab = ["00"]*66536
 
     def clear_stack(self):
+        print("Clear Stack")
         self.stack_tab = []
         self.input_list[8].delete(0, tk.END)
         self.input_list[8].insert(0, "0000") 
@@ -289,6 +299,8 @@ class Application(tk.Frame):
 
     def __init__(self, master=None):
         super().__init__(master)
+
+        self.master.title("8086 Simple simulator")
         
         self.input_list= ['AX_input',
                         'BX_input',
